@@ -15,3 +15,12 @@ Compile:
 run:
 
     ./MergeLHEfiles.exe   new.lhe    old1.lhe   old2.lhe   old3.lhe
+
+
+Backup
+====
+
+where:
+
+    /home/amassiro/Latinos/LHE-tools
+
