@@ -49,7 +49,7 @@ run:
 
 options:
 
-    it uses "new" to create N new files called new_1, new_2, ...
+    it uses "old.new" to create N new files called "new"_1, "new"_2, ...
 
 
 Backup
