@@ -5,6 +5,7 @@
 #include <vector>
 #include <string.h>
 #include <stdio.h>
+#include "LHEF.h"
 
 int main(int argc, char** argv) {
 
@@ -27,33 +28,30 @@ int main(int argc, char** argv) {
  // open lhe file
  std::ofstream outFile(argv[1], std::ios::out);
 
- bool writeEvent = false;
- int eventIt = 0;
+ LHEF::Writer writer (outFile) ;
 
- outFile << "<LesHouchesEvents>" << std::endl;
+ int eventIt = 0;
 
  for(int fileIt = 0; fileIt < argc-2; fileIt++) {
   std::ifstream fileToAdd(fileToAddNames.at(fileIt), std::ios::in);
+  LHEF::Reader reader(fileToAdd);
 
-  while(!fileToAdd.eof()) {
-   getline(fileToAdd, line2); 
+  if (fileIt == 0) {
+   writer.headerBlock() << reader.headerBlock;
+   writer.initComments() << reader.initComments;
+   writer.heprup = reader.heprup;
+   writer.init();
+  }
 
-     // decide whether to skip event or not 
-   if( line2 == "<event>" )  {
-    ++eventIt;
-    writeEvent = true;
-   }
-     // write line to outFile
-   if(writeEvent == true) {
-    outFile << line2 << std::endl;
-   }
-     // end of event
-   if( line2 == "</event>" ) {
-    writeEvent = false;
-   }
+  while ( reader.readEvent() ) {
+   if ( reader.outsideBlock.length() ) std::cout << reader.outsideBlock;
+   writer.eventComments() << reader.eventComments;
+   writer.hepeup = reader.hepeup;
+   writer.writeEvent();
+   eventIt++;
   }
  }
- outFile << "</LesHouchesEvents>" << std::endl;
+
  std::cout << "Added " << eventIt << " events from " << argc-2 << " files to file " << argv[1] << std::endl;
  return 0;
 }
