@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
  int eventIt = 0;
 
  for(int fileIt = 0; fileIt < argc-2; fileIt++) {
+  std::cout << " Opening " << fileToAddNames.at(fileIt) << std::endl;
   std::ifstream fileToAdd(fileToAddNames.at(fileIt), std::ios::in);
   LHEF::Reader reader(fileToAdd);
 
