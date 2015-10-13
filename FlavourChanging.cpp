@@ -59,35 +59,37 @@ int main(int argc, char** argv) {
   
   int id1 = 0;
   int id2 = 0;
+  int idv1 = 0;
+  int idv2 = 0;
   
   //---- electron 11
   //---- muon     13
   //---- tau      15
   
   if (whattochange == 0 || whattochange == 1 || whattochange == 2 ) {
-   id1 = 11; //---- electron
+   id1 = 11; idv1 = -12; //---- electron
   }
   
   if (whattochange == 3 || whattochange == 4 || whattochange == 5 ) {
-   id1 = 13; //---- muon
+   id1 = 13; idv1 = -14; //---- muon
   }
   
   if (whattochange == 6 || whattochange == 7 || whattochange == 8 ) {
-   id1 = 15; //---- tau
+   id1 = 15; idv1 = -16; //---- tau
   }
   
   
   
   if (whattochange == 0 || whattochange == 3 || whattochange == 6 ) {
-   id2 = 11; //---- electron
+   id2 = 11; idv2 = 12;  //---- electron
   }
   
   if (whattochange == 1 || whattochange == 4 || whattochange == 7 ) {
-   id2 = 13; //---- muon
+   id2 = 13; idv2 = -14; //---- muon
   }
   
   if (whattochange == 2 || whattochange == 5 || whattochange == 8 ) {
-   id2 = 15; //---- tau
+   id2 = 15; idv2 = -16; //---- tau
   }
   
   
@@ -104,8 +106,8 @@ int main(int argc, char** argv) {
     }
     //---- neutrinos
     if (abs (reader.hepeup.IDUP.at (iPart)) == (idInput+1)) {               
-     if (reader.hepeup.IDUP.at (iPart) ==  (idInput+1)) reader.hepeup.IDUP.at (iPart) = id2 ;
-     if (reader.hepeup.IDUP.at (iPart) == -(idInput+1)) reader.hepeup.IDUP.at (iPart) = -id1 ;               
+     if (reader.hepeup.IDUP.at (iPart) == -(idInput+1)) reader.hepeup.IDUP.at (iPart) = idv1 ;
+     if (reader.hepeup.IDUP.at (iPart) ==  (idInput+1)) reader.hepeup.IDUP.at (iPart) = -idv2 ;               
     }
     
     
