@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
   
   
   if (whattochange == 0 || whattochange == 3 || whattochange == 6 ) {
-   id2 = 11; idv2 = 12;  //---- electron
+   id2 = 11; idv2 = -12;  //---- electron
   }
   
   if (whattochange == 1 || whattochange == 4 || whattochange == 7 ) {
